@@ -5,8 +5,9 @@
 一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）
 插件，新增人机交互用的 `/cron` 斜杠命令，实现**按 cron 定时循环**。
 
-`/cron "*/30 * * * *"` 会在每个匹配该 cron 表达式的整分时刻（例如 `:00` 和
-`:30`）触发一次，每次提醒 agent 继续工作，直到你用 `/cron stop` 停止。
+`/cron "*/30 * * * *"` 启动时会先发一条确认通知，随后在每个匹配该 cron 表达
+式的整分时刻（例如 `:00` 和 `:30`）触发一次，每次提醒 agent 继续工作，直到
+你用 `/cron stop` 停止。
 
 ## 安装
 
@@ -66,8 +67,8 @@ dsh plugin --profile web add github:XiaoWind/dsh-cron
 
 ### 语义
 
-- **按墙钟对齐。** 与 `/loop` 不同，没有「立即触发」——首次触发发生在下一个匹配
-  cron 表达式的整分时刻。
+- **按墙钟对齐。** 任务的首次触发发生在下一个匹配 cron 表达式的整分时刻；启动
+  `/cron` 时会先发一条确认通知（开启一个回合），让新会话立即出现在会话列表中。
 - **绝不打断进行中的回合。** 若触发时刻 agent 正忙，会等它回到空闲后再触发（补
   上这一次，不丢失）。
 - **跨重启保存。** 计划持久化到 `$DSH_HOME/dsh-cron/<sessionId>.json`。重启后

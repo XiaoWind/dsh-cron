@@ -6,9 +6,9 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH)
 plugin that adds a human-facing `/cron` slash command for **cron-scheduled,
 recurring agent loops**.
 
-`/cron "*/30 * * * *"` fires one tick at every wall-clock minute matching the
-cron expression (for example `:00` and `:30`), re-prompting the agent each
-time, until you stop it with `/cron stop`.
+`/cron "*/30 * * * *"` posts a start notice, then fires one tick at every
+wall-clock minute matching the cron expression (for example `:00` and `:30`),
+re-prompting the agent each time, until you stop it with `/cron stop`.
 
 ## Install
 
@@ -74,9 +74,10 @@ default schedule applies.
 
 ### Semantics
 
-- **Wall-clock anchored.** Unlike `/loop`, there is no immediate first tick —
-  the first tick fires at the next wall-clock minute matching the cron
-  expression.
+- **Wall-clock anchored.** The objective's first tick fires at the next
+  wall-clock minute matching the cron expression. Starting `/cron` posts a
+  confirmation notice first, so a fresh session opens a turn and appears in the
+  session list immediately.
 - **Never interrupts a running turn.** If a fire time arrives while the agent is
   busy, the tick waits for idle and then fires (it catches up the missed
   occurrence).
