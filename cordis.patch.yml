@@ -1,0 +1,17 @@
+# dsh-cron bundle layer
+#
+# A DSH bundle exports a top-level YAML array of include PatchOptions. This
+# file inserts one entry (this package itself) into the booted profile's
+# composition. The entry is a Cordis function plugin (lib/index.js) that
+# registers the human-facing `/cron` slash command.
+#
+# The plugin injects the `commands` service, so it activates only in profiles
+# that compose a command adapter (the shipped `web` profile does). Set
+# `config.defaultCron` to change the schedule used by a bare `/cron <objective>`
+# (an objective with no leading cron expression).
+- insert:
+    - id: cron
+      name: dsh-cron
+      config:
+        # 5-field cron used when `/cron <objective>` has no leading schedule.
+        defaultCron: "*/10 * * * *"
