@@ -95,9 +95,6 @@ dsh plugin --profile web add github:XiaoWind/dsh-cron
 # 语法检查
 node --check lib/index.js
 node --check lib/cron.js
-
-# cron 解析单元测试
-node test/cron.test.mjs
 ```
 
 插件是单文件 ESM Cordis 函数插件（`lib/index.js`），无需构建步骤。它导出

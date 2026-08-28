@@ -109,9 +109,6 @@ a bare `/cron <objective>` with no leading cron expression. The default is
 # syntax check
 node --check lib/index.js
 node --check lib/cron.js
-
-# cron parser unit test
-node test/cron.test.mjs
 ```
 
 The plugin is a single-file ESM Cordis function plugin (`lib/index.js`) with no
