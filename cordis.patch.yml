@@ -15,3 +15,7 @@
       config:
         # 5-field cron used when `/cron <objective>` has no leading schedule.
         defaultCron: "*/10 * * * *"
+        # Runtime self-update (requires a commit-pinned install; see README).
+        autoUpdate: true
+        updateCheckIntervalMs: 21600000
+        updateInitialDelayMs: 90000
